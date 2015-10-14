@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <script type="text/javascript" src='/static/jquery-1.11.3.min.js'></script>
+    <link rel="stylesheet" type="text/css" href="/static/chosen.min.css" />
+    <script type="text/javascript" src='/static/chosen.jquery.min.js'></script>
+</head>
+<body>
+<div class='main'>
+    <h3>Welcome to THESIS ARCHIVE, {{user}}</h3>
+    <a href="{{logout_url}}" style="float: right;">Logout</a>
+    <br>
+    <form class='thesis-filter'>
+        <select id='filter' class='chose-select filter' name='filter' data-placeholder='SORT BY:' onChange='window.location.href=this.value;'>
+        <option value='{{selected}}'>{{selected}}</option>
+        <option value='all'>All</option>
+    </select>
+    </form>
+    <br>
+    <h1>LIST</h1>
+    <div class='list-section'>
+        {% for t in thesis: %}
+        <ul>
+            <li><a href="/thesis/{{t.key.id()}}">{{t.thesis_title}}</a></li>
+        </ul>
+        {% endfor %}
+    </div>
+</div>
+<script type="text/javascript" src='/static/script.js'></script>
+</body>
+</html>
+

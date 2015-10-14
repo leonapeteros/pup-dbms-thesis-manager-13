@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <script type="text/javascript" src='/static/jquery-1.11.3.min.js'></script>
+    <link rel="stylesheet" type="text/css" href="/static/chosen.min.css" />
+    <script type="text/javascript" src='/static/chosen.jquery.min.js'></script>
+    <script type="text/javascript" src='/static/chosen.proto.min.js'></script>
+</head>
+<body>
+<div class='main'>
+    <h3>Welcome to THESIS ARCHIVE, {{user}}</h3>
+    <a href="{{logout_url}}" style="float: right;">Logout</a>
+    <br>
+    <br>
+    <div class='form-section'>
+        <form class='thesis-entry'>
+          <select data-placeholder='Select Year' class='chose-select thesis_year' name="thesis_year">
+            <option selected></option>
+            <option value="2015">2015</option>
+            <option value="2014">2014</option>
+            <option value="2013">2013</option>
+            <option value="2012">2012</option>
+            <option value="2011">2011</option>
+          </select>
+          <input class="field" type="text" name="thesis_title" placeholder="TITLE" />
+          <textarea class="field" name="thesis_abstract" placeholder="ABSTRACT" > </textarea>
+          <select class="chosen-select thesis_adviser" name="thesis_adviser" data-placeholder="Select Thesis Adviser">
+            <option selected></option>
+            <option><button href='/faculty/create'>Add Faculty</button></option>
+          </select>
+          <h3>SECTION</h3>
+          <select data-placeholder="Select Section" class='chose-select thesis_section' name="thesis_section">
+            <option selected></option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <br>
+          <select data-placeholder='Select Proponents' multiple="" class='chosen-select thesis_proponents' name='thesis_proponents'>
+            <option selected></option>
+            <option>Add Student</option>
+          </select>
+          <select data-placeholder='Select Department' class='chose-select thesis_department' name='thesis_department'>
+            <option selected></option>
+            <option>Add Department</option>
+          </select>
+
+          <input type="submit" value="SUBMIT" />
+        </form>
+    </div>
+</div>
+<script type="text/javascript" src='/static/assets-thesis.js'></script>
+<script type="text/javascript">
+  $('.thesis_section').chosen();
+  $('.thesis_year').chosen();
+</script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <script type="text/javascript" src='/static/jquery-1.11.3.min.js'></script>
+    <link rel="stylesheet" type="text/css" href="/static/chosen.min.css" />
+    <script type="text/javascript" src='/static/chosen.jquery.min.js'></script>
+    <link rel="stylesheet" type="text/css" href="/static/Pikaday/css/pikaday.css">
+    <link rel="stylesheet" type="text/css" href="/static/Pikaday/css/site.css">
+</head>
+<body>
+<div class='main'>
+    <h3>Welcome to THESIS ARCHIVE, {{user}}</h3>
+    <a href="{{logout_url}}" style="float: right;">Logout</a>
+    <br>
+    <br>
+    <div class='form-section'>
+        <form class="student-update">
+          <input class="field" placeholder="FIRST NAME" name="student_fname" value='{{item.student_fname}}' />
+          <input class="field" placeholder="LAST NAME" name="student_sname" value='{{item.student_sname}}'/>
+          <input class='field' placeholder='PHONE NUMBER' name='student_phone' value='{{item.student_phone}}' />
+          <input class='field' placeholder='EMAIL ADDRESS' name='student_email' value='{{item.student_email}}' />
+          <input class='field' placeholder='STUDENT NUMBER' name='student_number' value='{{item.student_number}}' />
+          <input type="text" id="datepicker" name='student_bday' value='{{item.student_bday}}' />
+         <br>
+          <select class='chosen-select field' id='yearGraduated' name='student_graduated'>
+            <option value='{{item.student_graduated}}' selected>{{item.student_graduated}}</option>
+          </select>
+           <select class='department-list' name='student_department'>
+            <option value='{{dept}}'>{{dept}}</option>
+          </select>
+          <input type="submit" value='SUBMIT' />
+        </form>
+        <form class='student-delete'>
+          <input type='submit' value='DELETE'/>
+        </form>
+    </div>
+</div>
+<script type="text/javascript" src='/static/assets-students.js'></script>
+<script type="text/javascript" src='/static/assets-department.js'></script>
+<script type="text/javascript" src='/static/Pikaday/pikaday.js'></script>
+<script>
+    var picker = new Pikaday({ field: document.getElementById('datepicker'),
+    yearRange: [1950, 2015] });
+</script>
+<script type="text/javascript">
+    var min = new Date().getFullYear();
+        max = 1904;
+        select = document.getElementById('yearGraduated');
+
+    for (var i = min; i > max; i--){
+        var opt = document.createElement('option');
+        opt.value = i;
+        opt.innerHTML = i;
+        select.appendChild(opt);
+    }
+
+    select.value = new Date().getFullYear();
+    $('.chosen-select').chosen();
+</script>
+<script type="text/javascript">
+  function studentEdit(event)
+  {
+    var data = $(event.target).serializeArray();
+
+    var student = {};
+    for (var i = 0; i < data.length; i++) {
+      student[data[i].name] = data[i].value;
+  }
+
+  var user_api = '/student/' + '{{item.key.id()}}';
+  $.post(user_api, student, function(response) {
+    console.log('data', response)
+    if (response.status = 'OK') {
+       alert('Registration success');
+       window.location.replace("/");
+     } else {
+       alert('Something went wrong');
+     }
+  });
+  return false;
+  }
+
+  function studentDelete(event)
+  {
+    var data = $(event.target).serializeArray();
+
+    var student = {};
+    var j = 0;
+    for (var i = 0; i < data.length; i++) {
+      student[data[i].name] = data[i].value;
+    }
+
+    var r = confirm("Are you sure you want to delete this entry?");
+
+    if (r == true) {
+      var student_api = '/student/{{item.key.id()}}/delete';
+      $.post(student_api, student, function(response) {
+      console.log(response)
+      if (response.status = 'OK') {
+         alert('Delete success');
+         window.location.replace("/");
+       } else {
+         alert('Something went wrong');
+       }
+    });
+    }
+    return false;
+  }
+
+  $('.student-update').submit(studentEdit);
+  $('.student-delete').submit(studentDelete);
+</script>
+</body>
+</html>

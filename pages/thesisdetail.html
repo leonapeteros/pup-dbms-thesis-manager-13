@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <script type="text/javascript" src='/static/jquery-1.11.3.min.js'></script>
+    <link rel="stylesheet" type="text/css" href="/static/chosen.min.css" />
+    <script type="text/javascript" src='/static/chosen.jquery.min.js'></script>
+</head>
+<body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_PI/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div class='main'>
+    <h3>Welcome to THESIS ARCHIVE, {{user}}</h3>
+    <a href="{{logout_url}}" style="float: right;">Logout</a>
+    <br>
+    <div>
+        <h4>{{thesis.thesis_title}}</h4>
+        <p>Year: {{thesis.thesis_year}}</p>
+        <p>Adviser: {{adviser}}</p>
+        <p>Proponents:
+            <ul>
+                {% for p in proponents: %}
+                <li>{{p}}</li>
+                {%endfor%}
+            </ul>
+        </p>
+        <p>Abstract: <br>
+            {{thesis.thesis_abstract}}
+        </p>
+        {% for key, value in edit_link.items():%}
+        <a href="{{value}}">{{key}}</a>
+        {%endfor%}
+    </div>
+    <aside>
+        <ul>
+            {% for t in related: %}
+            <li><a href="{{t.key.id()}}">{{t.thesis_title}}</a></li>
+            {%endfor%}
+        </ul> 
+    </aside>
+</div>
+<div id='fb-comments' class="fb-comments" data-numposts="5"></div>
+<script type="text/javascript">
+    var link = location.protocol + "//" + location.hostname + (location.port && ":" + location.port) + "/thesis/{{thesis.key.id()}}";
+    document.getElementById("fb-comments").setAttribute("data-href", link);
+</script>
+</body>
+</html>
+

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <script type="text/javascript" src='/static/jquery-1.11.3.min.js'></script>
+    <link rel="stylesheet" type="text/css" href="/static/chosen.min.css" />
+    <script type="text/javascript" src='/static/chosen.jquery.min.js'></script>
+    <script type="text/javascript" src='/static/chosen.proto.min.js'></script>
+    <link rel="stylesheet" type="text/css" href="/static/cyborg/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/cyborg/css/flat-ui.min.css">
+    <script type="text/javascript">
+        $(document).ready(function(){
+            if ($("#university_list option[value='{{univ}}']").length > 0;) {
+              $("#university_list option[value='{{univ}}']").remove();
+            };
+        });
+    </script>
+</head>
+<body>
+<div class='container' style='padding-bottom:150px;'>
+  <nav class="navbar navbar-default navbar-inverse navbar-embossed navbar-lg" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+          <span class="sr-only">Toggle navigation</span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="navbar-collapse-01">
+        <ul class="nav navbar-nav">
+          <li class='active'><a href="/">Home</a></li>
+        {%for key, value in links.items(): %}
+          <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{key}}<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                {%for k, v in value.items(): %}
+                <li><a href="{{v}}" style="float: right;">{{k}}</a></li>
+                {%endfor%}
+              </ul>
+          </li>
+        {%endfor%}
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class='divider-vertical'></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{user}}<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{logout_url}}" style="float: right;">Logout</a></li>
+              </ul>
+            </li>
+            <li><a href="{{search_url}}">Search Thesis</a></li>
+          </ul>
+      </div><!-- /.navbar-collapse -->
+    </nav><!-- /navbar -->
+
+    <div class='row'>
+        <div class='col-md-4'></div>
+          <div class='col-md-4'>
+            <div class='well well-lg'>
+                <div class='form-group' >
+                    <form class="college_departments">
+                        <p style='text-align:center;'>UPDATE COLLEGE ENTRY</p>
+                        <p>University:</p>
+                        <select id='university_list' data-toggle="select" class="form-control select select-primary select-lg university_list" name='college_university'>
+                            <option>Select University</option>
+                            <option value='/university/create'>Add University</option>
+                            <option selected value='{{univ}}'>{{univ}}</option>
+                        </select>
+                        <div style='padding-top:10px;padding-bottom:10px;'>
+                            <p>College:</p>
+                            <input class='field form-control flat' placeholder='COLLEGE NAME' name='college_name' value='{{item.college_name}}' />
+                            <p>Departments:</p>
+                            <select data-toggle="select" multiple class="form-control multiselect multiselect-primary mrs mbm" name='college_department'>
+                            {% for d in dept: %}
+                              <option selected value='{{d}}'>{{d}}</option>
+                            {% endfor %}
+                          </select>
+                            <div style='padding-top:10px;padding-bottom:10px;padding-left:5px;'><input style='float:right;' class='btn btn-warning' type="submit" value='SUBMIT' />
+                          </div>
+                        </div>
+                    </form>
+                    <br>
+
+                    <div style='padding-top:10px;padding-bottom:10px;'>
+                      <form class='college-delete'>
+                         <input style='float:right;' class='btn btn-danger' type='submit' value='DELETE'>
+                      </form>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class='col-md-4'></div>
+    </div>
+</div>
+<footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-7">
+            <h3 class="footer-title">About This Web App</h3>
+            <p>This web application is the final project for Database Management System, under Engr. Roman Angelo Tria, Department of Computer Engineering, Polytechnic University of the Philippines.
+            </p>
+
+            <!-- p class="pvl" -->
+                <!-- <iframe src="http://ghbtns.com/github-btn.html?user=BerKeyinde&type=follow&count=true" height="20" width="195" frameborder="0" scrolling="0" style="width:195px; height: 20px;" allowTransparency="true"></iframe> -->
+              <!--<iframe src="http://ghbtns.com/github-btn.html?user=designmodo&repo=flat-ui&type=fork&count=true" height="20" width="107" frameborder="0" scrolling="0" style="width:105px; height: 20px;" allowTransparency="true"></iframe>-->
+              
+            </p>
+          </div> <!-- /col-xs-7 -->
+
+          <div class="col-xs-5">
+            <div class="footer-banner">
+              <!-- <h3 class="footer-title">Features</h3>
+              <ul>
+                <li>Thesis CrUD and Management for Online Compendium</li>
+                <li>Faculty CrUD</li>
+                <li>Students/Proponents CrUD</li>
+   -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+<script type="text/javascript" src='/static/assets-college.js'></script>
+<script type="text/javascript" src='/static/assets-university.js'></script>
+<script type="text/javascript" src='/static/cyborg/js/flat-ui.min.js'></script>
+<script type="text/javascript" src='/static/cyborg/js/prettify.js'></script>
+<script type="text/javascript" src='/static/cyborg/js/radiocheck.js'></script>
+<script type="text/javascript" src='/static/cyborg/js/application.js'></script>
+<script type="text/javascript" src='/static/cyborg/js/vendor/bootstrap.min.js'></script>
+<script type="text/javascript">
+        $('a[href="#"]').click(function(){
+          $('.dropdown-toggle').dropdown()
+        }); 
+</script>
+<script>
+      $(document).ready(function(){
+        $('select[name="inverse-dropdown"], select[name="inverse-dropdown-optgroup"], select[name="inverse-dropdown-disabled"]').select2({dropdownCssClass: 'select-inverse-dropdown'});
+
+        $('select[name="college_department"]').select2({dropdownCssClass: 'show-select-search'});
+        $('select[name="inverse-dropdown-searchfield"]').select2({dropdownCssClass: 'select-inverse-dropdown show-select-search'});
+      });
+    </script>
+<script type="text/javascript">
+  function collegeEdit(event)
+  {
+    var d = $('.college_department').val();
+    var data = $(event.target).serializeArray();
+
+    var college = {};
+    var j = 0;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].name == 'college_department') {
+        college['college_department_' + j] = data[i].value
+        j++;
+      } else {college[data[i].name] = data[i].value;} 
+    }
+
+    var college_api = '/college/{{item.key.id()}}';
+    $.post(college_api, college, function(response) {
+      console.log('data', response)
+      if (response.status = 'OK') {
+         alert('Update success');
+         window.location.replace("/");
+       } else {
+         alert('Something went wrong');
+       }
+    });
+    return false;
+  }
+
+  function collegeDelete(event)
+  {
+    var data = $(event.target).serializeArray();
+
+    var college = {};
+    var j = 0;
+    for (var i = 0; i < data.length; i++) {
+      college[data[i].name] = data[i].value;
+    }
+
+    var r = confirm("Are you sure you want to delete this entry?");
+
+    if (r == true) {
+      var college_api = '/college/{{item.key.id()}}/delete';
+      $.post(college_api, college, function(response) {
+      console.log(response)
+      if (response.status = 'OK') {
+         alert('Delete success');
+         window.location.replace("/");
+       } else {
+         alert('Something went wrong');
+       }
+    });
+    }
+    return false;
+  }
+
+
+  $('.college_departments').submit(collegeEdit);
+  $('.college-delete').submit(collegeDelete);
+
+</script>
+</body>
+</html>

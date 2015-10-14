@@ -1,0 +1,37 @@
+div.container.center-row{
+   margin: auto;         /* 2 */
+}   /* 4 */
+
+.main {
+    width: 400px;
+    margin: auto;
+}
+
+form input[type=text] {
+    width: 100%;
+    margin-top: 5px;
+    line-height: 20px;
+}
+/*form input[type=submit] {
+    margin-top: 5px;
+    position: relative;
+    float: right;
+}*/
+
+form textarea {
+  width: 100%;
+  margin-top: 5px;
+  line-height: 20px;
+}
+
+.divider-vertical {
+height: 77px;
+margin: 0 9px;
+border-left: 1px solid #F2F2F2;
+border-right: 1px solid #FFF;
+}
+ul { list-style-type: none; }
+
+.grp {
+  padding-bottom: 10px;
+}

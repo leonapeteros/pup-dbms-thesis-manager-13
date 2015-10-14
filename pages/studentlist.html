@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <script type="text/javascript" src='/static/jquery-1.11.3.min.js'></script>
+    <script type="text/javascript" src='/static/jquery-ui.min.js'></script>
+    <script type="text/javascript" src='/static/chosen.jquery.min.js'></script>
+    <link rel="stylesheet" type="text/css" href="/static/cyborg/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/cyborg/css/flat-ui.min.css">
+</head>
+<body>
+<div class='container' style='padding-bottom:150px;'>
+    <nav class="navbar navbar-default navbar-inverse navbar-embossed navbar-lg" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+          <span class="sr-only">Toggle navigation</span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="navbar-collapse-01">
+        <ul class="nav navbar-nav">
+          <li class='active'><a href="/">Home</a></li>
+        {%for key, value in links.items(): %}
+          <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{key}}<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                {%for k, v in value.items(): %}
+                <li><a href="{{v}}" style="float: right;">{{k}}</a></li>
+                {%endfor%}
+              </ul>
+          </li>
+        {%endfor%}
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class='divider-vertical'></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{user}}<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{logout_url}}" style="float: right;">Logout</a></li>
+              </ul>
+            </li>
+            <li><a href="{{search_url}}">Search Thesis</a></li>
+          </ul>
+      </div><!-- /.navbar-collapse -->
+    </nav><!-- /navbar -->
+    <div class='row'>
+        <div class='col-md-2'></div>
+        <div class='col-md-10'>
+            <h4>List of Registered Students:</h4>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-3'></div>
+        <div class='col-md-7'>
+            <div class='list-section'>
+              <ul class='students'></ul>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-7">
+            <h3 class="footer-title">About This Web App</h3>
+            <p>This web application is the final project for Database Management System, under Engr. Roman Angelo Tria, Department of Computer Engineering, Polytechnic University of the Philippines.
+            </p>
+
+            <!-- p class="pvl" -->
+                <!-- <iframe src="http://ghbtns.com/github-btn.html?user=BerKeyinde&type=follow&count=true" height="20" width="195" frameborder="0" scrolling="0" style="width:195px; height: 20px;" allowTransparency="true"></iframe> -->
+              <!--<iframe src="http://ghbtns.com/github-btn.html?user=designmodo&repo=flat-ui&type=fork&count=true" height="20" width="107" frameborder="0" scrolling="0" style="width:105px; height: 20px;" allowTransparency="true"></iframe>-->
+              
+            </p>
+          </div> <!-- /col-xs-7 -->
+
+          <div class="col-xs-5">
+            <div class="footer-banner">
+              <!-- <h3 class="footer-title">Features</h3>
+              <ul>
+                <li>Thesis CrUD and Management for Online Compendium</li>
+                <li>Faculty CrUD</li>
+                <li>Students/Proponents CrUD</li>
+   -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+<script type="text/javascript">
+    $('a[href="#"]').click(function(){
+      $('.dropdown-toggle').dropdown()
+    }); 
+</script>
+<script type="text/javascript" src='/static/assets-students.js'></script>
+<script type="text/javascript" src='/static/cyborg/js/flat-ui.min.js'></script>
+<script type="text/javascript" src='/static/cyborg/js/prettify.js'></script>
+<script type="text/javascript" src='/static/cyborg/js/radiocheck.js'></script>
+<script type="text/javascript" src='/static/cyborg/js/application.js'></script>
+<script type="text/javascript" src='/static/cyborg/js/vendor/bootstrap.min.js'></script>
+</body>
+</html>
